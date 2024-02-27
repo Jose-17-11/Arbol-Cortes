@@ -118,13 +118,13 @@ public class ArbolExpresiones extends JPanel {
     }
     
 	public static void main(String[] args) {
-	    String expresion = JOptionPane.showInputDialog("Ingrese la expresión:");
+	    String expresion = JOptionPane.showInputDialog("Ingrese la expresión: (a+b)+(c+b)+e^z");
 	    String[] array = separarElementos(expresion);
 	    ArbolExpresiones operadores = new ArbolExpresiones();
 	    
 	    
 	    
-	    if (array.length >= 15) {
+	    if (array.length >= 3) {
 	        SwingUtilities.invokeLater(() -> {
 	            JFrame frame = new JFrame("Árbol de Expresiones");
 	            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -154,15 +154,17 @@ public class ArbolExpresiones extends JPanel {
 	            		System.out.println(array[i]);
 	            		solucion = false;
 	            		break;
-	            	}else {
-//	    		System.out.println("Vas bien bro " + array[i]);
 	            	}
-	            }//2+4-5*8/10^2    12+10-a*c/5^2
-	            
-//	            (a+b)+(c+b)+e^z
+	            }
+
+//	            (a+b)+(c+b)+e^z		(3+4)+(5+4)+6^2
 	            if(solucion==true) {
 	            	Double resultado = operadores.operadores(array[1], array[3], array[7], array[12], array[14]);
-		            JOptionPane.showMessageDialog(null, expresion + " = " + resultado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+	            	if(array[3].equals(array[9])) {
+	            		JOptionPane.showMessageDialog(null, expresion + " = " + resultado, "Resultado", JOptionPane.INFORMATION_MESSAGE);	            		
+	            	}else {
+	            		JOptionPane.showMessageDialog(null,"La variable B debe ser igual como en la formula" , "Variable B incorrecta", JOptionPane.INFORMATION_MESSAGE);	            		
+	            	}
 	            }
 	        });
 	    } else {	    
